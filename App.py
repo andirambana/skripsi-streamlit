@@ -7,11 +7,9 @@ from PIL import Image
 
 # LIBRARY PREDIKSI
 from datetime import date
-
 import numpy as np
 import pandas as pd
 from sklearn import datasets
-
 import yfinance as yf
 from prophet import Prophet
 from prophet.plot import plot_plotly
@@ -29,11 +27,11 @@ st.write('\n')
 
 # LIBRARY Navbar
 selected = option_menu(
-  menu_title=None,
-  options=["Beranda", "Prediksi"],
-  icons=["house", "book"],
-  default_index = 0,
-  orientation="horizontal",
+    menu_title=None,
+    options=["Beranda", "Prediksi"],
+    icons=["house", "book"],
+    default_index = 0,
+    orientation="horizontal",
 )
 
 st.write('\n')
@@ -43,38 +41,36 @@ st.write('\n')
 # PROGRAM BERANDA
 if selected == "Beranda":
 
-    st.subheader('SEJARAH BINANCE COIN')
+    # st.subheader('PT. Telekomunikasi Indonesia')
     
-    # image = Image.open('logo.png')
-    # st.image(image, caption=None, width=700, use_column_width='False', clamp=False, channels="RGB", output_format="auto")
+    image = Image.open('assets/logo-telkom.png')
+    st.image(image, caption=None, width=700, use_column_width='False', clamp=False, channels="RGB", output_format="auto")
     
-    st.write('Diluncurkan pertama kali pada 26 Juni hingga 3 Juli 2017 dalam jaringan blockchain Ethereum, BNB memiliki harga penawarannya perdana sebesar 1 ETH untuk 2.700 BNB atau 1 BTC untuk 20.000 BNB.')
-    st.write('Kendati ditawarkan perdana dalam ICO, aset digital ini tidak mengklaim sebagai produk investasi ataupun trading. Menurut pengembangnya, BNB adalah alat tukar yang digunakan untuk pembayaran, utamanya di platform yang berada dalam lingkup Binance, seperti binance.com, Binance DEX, Binance Chain, dan aplikasi di atas Binance Smart Chain.')
-    st.write('Ketika ICO, sebanyak 10% atau 20 juta BNB dijual kepada angel investor. Apasih angel investor? Angel investor adalah sebutan untuk investor yang membiayai start up di awal pendiriannya. Lalu, sebanyak 40% atau 80 juta BNB diperuntukkan bagi tim, sementara sisanya atau 50% dari total suplai BNB atau sebanyak 100 juta koin lagi, dilepas ke pasar.')
-    st.write('Adapun dana yang dihimpun dari ICO tersebut dipakai untuk membangun platform Binance dan menutup biaya operasional. Diketahui, sebanyak 30% dari total dana juga digunakan untuk membangun brand dan memasarkan BNB. Strategi ini terbukti sukses sebab terhitung 11 hari setelah penawaran perdananya, Binance telah memiliki platform sendiri.')
+    st.write('PT Telkom Indonesia (Persero) Tbk (Telkom) adalah Badan Usaha Milik Negara (BUMN) yang bergerak di bidang jasa layanan teknologi informasi dan komunikasi (TIK) dan jaringan telekomunikasi di Indonesia. Pemegang saham mayoritas Telkom adalah Pemerintah Republik Indonesia sebesar 52.09%, sedangkan 47.91% sisanya dikuasai oleh publik. Saham Telkom diperdagangkan di Bursa Efek Indonesia (BEI) dengan kode “TLKM” dan New York Stock Exchange (NYSE) dengan kode “TLK”.')
+    st.write('Dalam upaya bertransformasi menjadi digital telecommunication company, TelkomGroup mengimplementasikan strategi bisnis dan operasional perusahaan yang berorientasi kepada pelanggan (customer-oriented). Transformasi tersebut akan membuat organisasi TelkomGroup menjadi lebih lean (ramping) dan agile (lincah) dalam beradaptasi dengan perubahan industri telekomunikasi yang berlangsung sangat cepat. Organisasi yang baru juga diharapkan dapat meningkatkan efisiensi dan efektivitas dalam menciptakan customer experience yang berkualitas.')
+    st.write('Kegiatan usaha TelkomGroup bertumbuh dan berubah seiring dengan perkembangan teknologi, informasi dan digitalisasi, namun masih dalam koridor industri telekomunikasi dan informasi. Hal ini terlihat dari lini bisnis yang terus berkembang melengkapi legacy yang sudah ada sebelumnya.')
+    st.write('Telkom mulai saat ini membagi bisnisnya menjadi 3 Digital Business Domain:')
+    st.markdown('1. **Digital Connectivity:** Fiber to the x (FTTx), 5G, Software Defined Networking (SDN)/ Network Function Virtualization (NFV)/ Satellite')
+    st.markdown('2. **Digital Platform:** Data Center, Cloud, Internet of Things (IoT), Big Data/ Artificial Intelligence (AI), Cybersecurity')
+    st.markdown('3. **Digital Services:** Enterprise, Consumer')
     
     
-    st.subheader('SIAPAKAH PENDIRI BNB COIN?')
 
 # PROGRAM PREDIKSI
 if selected == "Prediksi":
 
-        #Scrapping data dari yahoo finance
-    START = "2017-05-21"
+    #Scrapping data dari website yahoo finance
+    START = "2017-08-01"
     TODAY = date.today().strftime("%Y-%m-%d")
-
-    #Coin yang akan di input
+    
     stocks = ('TLKM.JK',)
-    # selected_stock = st.selectbox('Prediksi Data', stocks)
 
-    #Lama durasi prediksi
     n_years = st.slider('Pilih berapa tahun untuk prediksi:', 1, 5)
     period = n_years * 365
 
-    #cache data sehingga sistem tak perlu mengunduh data ulang
     @st.cache
     def load_data(ticker):
-        data = yf.download(ticker, START, TODAY)
+        data = yf.download(ticker, START, TODAY,)
         data.reset_index(inplace=True)
         return data
 
@@ -83,7 +79,10 @@ if selected == "Prediksi":
     data = load_data(stocks)
     data_load_state.text('Memuat Data, harap tunggu hingga selesai.')
 
-    st.subheader('Data Harga ')
+    st.subheader('Data Historis')
+    st.write(data)
+    
+    st.subheader('Data Harga Realtime')
     st.write(data.tail())
 
     #Kode data harga sekarang
