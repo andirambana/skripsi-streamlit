@@ -43,10 +43,8 @@ st.write('\n')
 
 # PROGRAM BERANDA
 if selected == "Beranda":
-
-    # st.subheader('PT. Telekomunikasi Indonesia')
     
-    image = Image.open('assets/logo-telkom.png')
+    image = Image.open('logo-telkom.png')
     st.image(image, caption=None, width=700, use_column_width='False', clamp=False, channels="RGB", output_format="auto")
     
     st.markdown("<p style='text-align: justify; color: black;'>PT Telkom Indonesia (Persero) Tbk (Telkom) adalah Badan Usaha Milik Negara (BUMN) yang bergerak di bidang jasa layanan teknologi informasi dan komunikasi (TIK) dan jaringan telekomunikasi di Indonesia. Pemegang saham mayoritas Telkom adalah Pemerintah Republik Indonesia sebesar 52.09%, sedangkan 47.91% sisanya dikuasai oleh publik. Saham Telkom diperdagangkan di Bursa Efek Indonesia (BEI) dengan kode “TLKM” dan New York Stock Exchange (NYSE) dengan kode “TLK”.</p>", unsafe_allow_html=True)
@@ -82,7 +80,7 @@ if selected == "Beranda":
     st.write('\n')
 
     st.markdown("<h3 style='text-align: center;'>Struktur Organisasi</h3>",unsafe_allow_html=True)
-    image = Image.open('assets/struktur-telkom.png')
+    image = Image.open('struktur-telkom.png')
     st.image(image, caption=None, width=800, use_column_width='False', clamp=False, channels="RGB", output_format="auto")
 
 
