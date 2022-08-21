@@ -9,4 +9,4 @@ yahoo-finance
 matplotlib
 plotly
 Pillow
-turtle
+PythonTurtle
