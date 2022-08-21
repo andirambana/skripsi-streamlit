@@ -25,7 +25,7 @@ st.write('\n')
 st.write('\n')
 st.write('\n')
 
-# LIBRARY Navbar
+# NAVBAR
 selected = option_menu(
     menu_title=None,
     options=["Beranda", "Prediksi"],
@@ -74,10 +74,10 @@ if selected == "Prediksi":
         data.reset_index(inplace=True)
         return data
 
-    #Memuat data scrapping
+    #Loading Data scrapping
     data_load_state = st.text('Memuat Data...') 
     data = load_data(stocks)
-    data_load_state.text('Memuat Data, harap tunggu hingga selesai.')
+    data_load_state.text('Memuat Data, mohon tunggu sebentar..')
 
     st.subheader('Data Historis')
     st.write(data)
@@ -85,7 +85,7 @@ if selected == "Prediksi":
     st.subheader('Data Harga Realtime')
     st.write(data.tail())
 
-    #Kode data harga sekarang
+    #Data Harga Realtime
     def plot_raw_data():
         fig = go.Figure()
         fig.add_trace(go.Scatter(x=data['Date'], y=data['Open'], name="stock_open"))
@@ -95,17 +95,17 @@ if selected == "Prediksi":
             
     plot_raw_data()
 
-    #Modelling data
+    #Data Modelling
     df_train = data[['Date','Close']]
     df_train = df_train.rename(columns={"Date": "ds", "Close": "y"})
 
-    #Kode hasil prediksi prophet
+    #Hasil Prediksi Prophet
     m = Prophet()
     m.fit(df_train)
     future = m.make_future_dataframe(periods=period)
     forecast = m.predict(future)
 
-    st.subheader('Prediksi Data')
+    st.subheader('Data Prediksi')
     st.write(forecast.tail())
 
     st.write('Plot Prediksi untuk {n_years} Tahunan')
